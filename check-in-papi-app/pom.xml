@@ -76,7 +76,7 @@
 						<!-- Target=region, US, London, Frankfurt -->
 						<target>Cloudhub-US-East-2</target>
 						<provider>MC</provider>
-						<muleVersion>4.4.0</muleVersion>
+						<muleVersion>4.5.0</muleVersion>
 						<!-- reads credentials from settings.xml -->
 						<!-- server matches ID server in settings xml -->
 						<server>cloudhub-deploy</server>
