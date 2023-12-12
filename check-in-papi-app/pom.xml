@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<!-- students: replace with your AP org ID -->
+		<groupId>fca44444-f13a-4b0d-925a-b7d6b340d0ec</groupId>
+		<artifactId>solutions-bom</artifactId>
+		<version>1.0.0</version>
+		<!-- 1st form, set a relative path -->
+		<relativePath>../bom/pom.xml</relativePath>
+
+		<!-- 2nd form, short form for relativePath tag -->
+		<!-- parent form must be previously installed .m2 -->
+		<!-- <relativePath/> -->
+
+		<!-- 3rd form No relative path -->
+		<!-- maven settings.xml -->
+		<!-- resolve maven parent porm from remote repository -->
+	</parent>
+
+	<!-- Maven Coordinates -->
+	<!-- grupoId = must be your ORG ID -->
+	<!-- GAV Coordinates -->
+	<groupId>fca44444-f13a-4b0d-925a-b7d6b340d0ec</groupId>
+	<artifactId>check-in-papi-app</artifactId>
+	<version>1.0.0</version>
+	<!--convention = SEMANTIC VERSIONING -->
+
+	<packaging>mule-application</packaging>
+	<name>check-in-papi-app</name>
+
+	<properties>
+		<!-- overrides property from parent -->
+		<app.runtime>4.5.1</app.runtime>
+		<apiversion>v2</apiversion>
+		<mule.maven.plugin.version>4.0.0</mule.maven.plugin.version>
+	</properties>
+
+	<!-- plugins give additional power to maven -->
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<!-- and must exclude some file types from filtering in maven-resources-plugin 
+					config below -->
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+				<!-- and must exclude some file types from filtering in maven-resources-plugin 
+					config below -->
+			</testResource>
+		</testResources>
+
+		<plugins>
+			<plugin>
+				<!-- plugin defined at BOM/pom.xml -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
+				<!-- NEVER DELETE THIS PROPERTY, EXTENSIONS ON MMP -->
+				<extensions>true</extensions>
+				<configuration>
+					<classifier>mule-application</classifier>
+				</configuration>
+			</plugin>
+
+			<!-- resource plugin, replaces maven properties in properties files -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<!-- exclude all binary files from filtering! -->
+						<nonFilteredFileExtension>p12</nonFilteredFileExtension>
+						<nonFilteredFileExtension>jar</nonFilteredFileExtension>
+						<nonFilteredFileExtension>zip</nonFilteredFileExtension>
+						<nonFilteredFileExtension>jks</nonFilteredFileExtension>
+						<nonFilteredFileExtension>crt</nonFilteredFileExtension>
+						<nonFilteredFileExtension>pem</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.mule.connectors</groupId>
+			<artifactId>mule-http-connector</artifactId>
+			<version>1.8.0</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.connectors</groupId>
+			<artifactId>mule-sockets-connector</artifactId>
+			<version>1.2.3</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<!-- API SPEC, IS NOT PRESENT IN BOM/pom.xml -->
+		<dependency>
+			<groupId>fca44444-f13a-4b0d-925a-b7d6b340d0ec</groupId>
+			<artifactId>check-in-papi</artifactId>
+			<version>1.0.0</version>
+			<classifier>oas</classifier>
+			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-apikit-module</artifactId>
+			<version>1.9.2</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+	</dependencies>
+
+</project>
