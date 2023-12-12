@@ -137,5 +137,5 @@ jobs:
       env:
         AUTHOR: "Mr Bean"
       run: |
-        mvn clean deploy --file check-in-papi-app/pom.xml -DmuleDeploy -Denvironment="dev" -Dappl.name="check-in-papi-app" -Dencrypt.key=""         
+        mvn clean deploy --file check-in-papi-app/pom.xml -DmuleDeploy -Denvironment="dev" -Dappl.name="check-in-papi-app2" -Dencrypt.key=""         
   
